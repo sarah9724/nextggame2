@@ -23,6 +23,17 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['sqlite', 'sqlite3'],
     serverActions: true
+  },
+
+  webpack: (config) => {
+    // 忽略 tailwindcss 相关模块
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'tailwindcss': false,
+      'postcss': false,
+      'autoprefixer': false,
+    }
+    return config;
   }
 }
 

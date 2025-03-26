@@ -212,6 +212,18 @@ const gamesData = [
     features: ['简洁直观的界面', '渐进式难度', '高分记录系统', '无限挑战模式'],
     url: 'https://play2048.co/',
     iframeUrl: 'https://play2048.co/'
+  },
+  {
+    id: 26,
+    title: '怪物生存者',
+    category: '冒险',
+    rating: 4.9,
+    image: '/placeholder.jpg',
+    description: '在充满怪物的世界中生存并变得更强',
+    longDescription: '怪物生存者是一款刺激的生存冒险游戏，玩家将在一个充满各种怪物的世界中求生存。游戏采用了roguelike元素，每次游戏都会有不同的体验。玩家需要收集装备，升级能力，击败各种怪物并尽可能长时间地生存下去。游戏节奏紧张，画面精美，拥有丰富的怪物种类和武器系统，给玩家带来紧张刺激的游戏体验。',
+    features: ['多样化的怪物类型', '丰富的武器和装备', '随机生成的地图', '技能升级系统', '高难度挑战'],
+    url: 'https://example.com/monster-survivors',
+    iframeUrl: 'https://wanted5games.com/games/html5/monster-survivors-new-en-s-iga-cloud/index.html?pub=10'
   }
 ]
 

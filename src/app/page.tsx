@@ -153,6 +153,14 @@ const gamesData = [
     rating: 4.8,
     image: '/placeholder.jpg',
     description: '经典的数字合并游戏，简单上手但极具挑战性。'
+  },
+  {
+    id: 26,
+    title: '怪物生存者',
+    category: '冒险',
+    rating: 4.9,
+    image: '/placeholder.jpg',
+    description: '在充满怪物的世界中生存并变得更强，收集装备，击败各种怪物。'
   }
 ]
 

@@ -194,6 +194,17 @@ const baseGamesData: Game[] = [
     description: '经典的数字合并游戏，简单上手但极具挑战性',
     releaseDate: '2024-04-05',
     iframeUrl: 'https://play2048.co/'
+  },
+  {
+    id: 26,
+    title: '怪物生存者',
+    category: '冒险',
+    rating: 4.9,
+    image: '/placeholder.jpg',
+    description: '在充满怪物的世界中生存并变得更强',
+    releaseDate: '2024-04-10',
+    iframeUrl: 'https://wanted5games.com/games/html5/monster-survivors-new-en-s-iga-cloud/index.html?pub=10',
+    trend: 'up'
   }
 ]
 
