@@ -21,18 +21,23 @@ const nextConfig = {
 
   // 修复错误: 无法发送API请求的问题
   experimental: {
-    serverComponentsExternalPackages: ['sqlite', 'sqlite3'],
-    serverActions: true
+    serverActions: {
+      allowedOrigins: ['nextggame2.pages.dev']
+    }
   },
+  
+  // 外部包配置（修复了从experimental中移出的配置）
+  serverExternalPackages: ['sqlite', 'sqlite3'],
 
   webpack: (config) => {
-    // 忽略 tailwindcss 相关模块
+    // 防止 webpack 从 node_modules 中解析 tailwindcss
     config.resolve.alias = {
       ...config.resolve.alias,
       'tailwindcss': false,
       'postcss': false,
       'autoprefixer': false,
-    }
+    };
+    
     return config;
   }
 }

@@ -34,9 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
-      <body
-        className={`${poppins.variable} ${roboto.variable} ${inter.variable} antialiased min-h-screen bg-neutral-50 text-gray-900`}
-      >
+      <body className={`${poppins.variable} ${roboto.variable} ${inter.variable} antialiased min-h-screen`}>
         {children}
       </body>
     </html>

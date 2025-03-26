@@ -2,10 +2,10 @@
 
 import React from 'react'
 import { useParams } from 'next/navigation'
-import CommentSection from '@/app/components/CommentSection'
-import RatingSystem from '@/app/components/RatingSystem'
-import GameEmbed from '@/app/components/GameEmbed'
-import AppLayout from '@/app/components/AppLayout'
+import CommentSection from '../../components/CommentSection'
+import RatingSystem from '../../components/RatingSystem'
+import GameEmbed from '../../components/GameEmbed'
+import AppLayout from '../../components/AppLayout'
 
 // 模拟游戏数据
 const gamesData = [
