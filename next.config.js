@@ -18,6 +18,12 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+
+  // 修复错误: 无法发送API请求的问题
+  experimental: {
+    serverComponentsExternalPackages: ['sqlite', 'sqlite3'],
+    serverActions: true
+  }
 }
 
 module.exports = nextConfig 
