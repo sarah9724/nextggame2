@@ -26,9 +26,7 @@ const nextConfig = {
   
   // Next.js 15实验性功能修复
   experimental: {
-    serverActions: {
-      allowedOrigins: ['nextggame2.pages.dev']
-    },
+    serverActions: false,
     esmExternals: 'loose'
   },
   

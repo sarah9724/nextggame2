@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/app/lib/db';
+import { db } from '../../../lib/db';
 import { NextRequest } from 'next/server';
 
 // 处理GET请求 - 获取特定游戏的评论

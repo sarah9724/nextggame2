@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/app/lib/db';
+import { db } from '../../lib/db';
 
 // 处理POST请求 - 提交评分
 export async function POST(request: Request) {
