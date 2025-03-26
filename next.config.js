@@ -1,36 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 输出模式优化，适合静态部署
+  // 静态导出配置
   output: 'export',
   
-  // 配置图片处理
+  // 禁用图像优化
   images: {
     unoptimized: true,
-    domains: ['play2048.co', 'playpager.com'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '*.gameflare.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '*.pages.dev',
-      },
-    ],
   },
   
   // 优化生产环境
   productionBrowserSourceMaps: false,
-  
-  // 路径重写和重定向
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: '/api/:path*',
-      },
-    ];
-  },
   
   // 禁用严格模式以避免双重渲染引起的问题
   reactStrictMode: false,
@@ -45,16 +24,15 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   
-  // 自定义webpack配置
+  // 阻止解析TailwindCSS
   webpack: (config) => {
-    // 避免解析不必要的包
-    if (!config.resolve) {
-      config.resolve = {};
-    }
+    config.resolve = config.resolve || {};
+    config.resolve.alias = config.resolve.alias || {};
     
-    if (!config.resolve.alias) {
-      config.resolve.alias = {};
-    }
+    // 阻止解析TailwindCSS相关包
+    config.resolve.alias['tailwindcss'] = false;
+    config.resolve.alias['postcss'] = false;
+    config.resolve.alias['autoprefixer'] = false;
     
     return config;
   },
