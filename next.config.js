@@ -24,6 +24,17 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   
+  // Next.js 15实验性功能修复
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['nextggame2.pages.dev']
+    },
+    esmExternals: 'loose'
+  },
+  
+  // 将sqlite包配置为外部包
+  serverExternalPackages: ['sqlite', 'sqlite3'],
+  
   // 阻止解析TailwindCSS
   webpack: (config) => {
     config.resolve = config.resolve || {};
@@ -36,6 +47,12 @@ const nextConfig = {
     
     return config;
   },
+  
+  // 环境变量
+  env: {
+    NEXT_DISABLE_POSTCSS: '1',
+    SKIP_TAILWIND: 'true',
+  }
 }
 
 module.exports = nextConfig 

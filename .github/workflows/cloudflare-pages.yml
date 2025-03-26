@@ -1,0 +1,40 @@
+name: 部署到Cloudflare Pages
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: 构建和部署Next.js应用
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+
+      - name: 设置Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.18.0'
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 创建环境变量文件
+        run: |
+          echo "NEXT_DISABLE_POSTCSS=1" > .env.production
+          echo "SKIP_TAILWIND=true" >> .env.production
+          echo "NODE_ENV=production" >> .env.production
+          echo "NEXT_TELEMETRY_DISABLED=1" >> .env.production
+
+      - name: 构建
+        run: npm run build
+
+      - name: 部署到Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: nextggame2
+          directory: .next/static
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }} 
