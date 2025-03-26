@@ -206,28 +206,28 @@ export default function Home() {
 
   return (
     <AppLayout>
-      <div className="max-w-[1200px] mx-auto px-6 py-12">
+      <div className="container">
         {searchQuery && (
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold text-gray-800">
+          <div className="mb-4">
+            <h2 className="text-xl font-bold">
               搜索结果: "{searchQuery}"
             </h2>
-            <p className="text-gray-600 mt-1">
+            <p>
               找到 {filteredGames.length} 个游戏
             </p>
           </div>
         )}
 
         {/* 分类过滤器 */}
-        <div className="mb-12 overflow-auto pb-4 no-scrollbar">
-          <div className="flex space-x-3">
+        <div className="mb-4">
+          <div className="flex">
             {categories.map(category => (
               <button
                 key={category}
-                className={`flex items-center px-4 py-2 rounded-full whitespace-nowrap transition-all ${
+                className={`btn ${
                   selectedCategory === category
-                    ? 'bg-indigo-600 text-white shadow-md'
-                    : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                    ? 'btn-primary'
+                    : ''
                 }`}
                 onClick={() => setSelectedCategory(category)}
               >
@@ -241,37 +241,32 @@ export default function Home() {
         </div>
 
         {/* 游戏网格 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 grid-cols-4">
           {filteredGames.map(game => (
             <Link
               href={`/games/${game.id}`}
               key={game.id}
-              className="group"
             >
-              <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 h-full border border-gray-100">
-                <div className="relative">
-                  <div className="aspect-w-16 aspect-h-9 bg-gradient-to-r from-purple-100 to-indigo-100 w-full h-48 flex items-center justify-center">
-                    <div className="text-6xl group-hover:scale-110 transition-transform duration-300">🎮</div>
-                  </div>
-                  <div className="absolute top-3 right-3 flex items-center bg-black/50 backdrop-blur-md rounded-full px-2 py-1">
-                    <span className="text-yellow-400 text-xs mr-1">★</span>
-                    <span className="text-white text-xs">{game.rating}</span>
-                  </div>
+              <div className="card">
+                <div className="p-4 text-center">
+                  <div className="text-2xl">🎮</div>
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-semibold text-lg text-gray-900 group-hover:text-indigo-600 transition-colors">
+                <div className="p-4">
+                  <div className="flex justify-between">
+                    <h3 className="font-bold">
                       {game.title}
                     </h3>
-                    <span className="inline-block px-2 py-1 bg-indigo-50 text-indigo-600 text-xs rounded-full">
+                    <span className="text-lg">
                       {game.category}
                     </span>
                   </div>
-                  <p className="text-gray-600 text-sm line-clamp-2">
+                  <p>
                     {game.description}
                   </p>
-                  <div className="mt-4 pt-4 border-t border-gray-100 flex justify-end">
-                    <span className="text-indigo-600 text-sm font-medium group-hover:underline">查看详情</span>
+                  <div className="mt-4 text-center">
+                    <span>{'★'.repeat(Math.floor(game.rating))}</span>
+                    <span>{'☆'.repeat(5-Math.floor(game.rating))}</span>
+                    <span>{game.rating}</span>
                   </div>
                 </div>
               </div>
@@ -281,10 +276,10 @@ export default function Home() {
 
         {/* 空状态 */}
         {filteredGames.length === 0 && (
-          <div className="text-center py-16">
-            <div className="text-4xl mb-4">😢</div>
-            <h3 className="text-xl font-medium text-gray-900 mb-2">没有找到游戏</h3>
-            <p className="text-gray-600">
+          <div className="text-center py-4">
+            <div className="text-2xl mb-4">😢</div>
+            <h3 className="text-xl font-bold mb-2">没有找到游戏</h3>
+            <p>
               {searchQuery 
                 ? `没有找到与"${searchQuery}"相关的游戏，请尝试其他关键词`
                 : '当前分类下没有可用的游戏，请尝试选择其他分类'

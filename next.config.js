@@ -1,45 +1,63 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone', // 为Cloudflare Pages优化的输出模式
-  reactStrictMode: true,
+  // 输出模式优化，适合静态部署
+  output: 'export',
+  
+  // 配置图片处理
   images: {
-    unoptimized: true, // 在Cloudflare Pages上部署时可能需要禁用图像优化
-    domains: ['play2048.co', 'playpager.com'], // 允许的图片域名
+    unoptimized: true,
+    domains: ['play2048.co', 'playpager.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.gameflare.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.pages.dev',
+      },
+    ],
   },
-  // 在生产环境中禁用源映射以减小构建大小
+  
+  // 优化生产环境
   productionBrowserSourceMaps: false,
   
-  // 忽略构建时的ESLint错误
+  // 路径重写和重定向
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: '/api/:path*',
+      },
+    ];
+  },
+  
+  // 禁用严格模式以避免双重渲染引起的问题
+  reactStrictMode: false,
+  
+  // 跳过类型检查加速构建
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  
+  // 跳过ESLint检查
   eslint: {
     ignoreDuringBuilds: true,
   },
   
-  // 忽略构建时的TypeScript错误
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-
-  // 修复错误: 无法发送API请求的问题
-  experimental: {
-    serverActions: {
-      allowedOrigins: ['nextggame2.pages.dev']
-    }
-  },
-  
-  // 外部包配置（修复了从experimental中移出的配置）
-  serverExternalPackages: ['sqlite', 'sqlite3'],
-
+  // 自定义webpack配置
   webpack: (config) => {
-    // 防止 webpack 从 node_modules 中解析 tailwindcss
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      'tailwindcss': false,
-      'postcss': false,
-      'autoprefixer': false,
-    };
+    // 避免解析不必要的包
+    if (!config.resolve) {
+      config.resolve = {};
+    }
+    
+    if (!config.resolve.alias) {
+      config.resolve.alias = {};
+    }
     
     return config;
-  }
+  },
 }
 
 module.exports = nextConfig 

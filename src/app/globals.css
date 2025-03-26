@@ -1,12 +1,4 @@
-/* 基础样式，替代Tailwind */
-:root {
-  --font-poppins: 'Poppins', system-ui, sans-serif;
-  --font-roboto: 'Roboto', system-ui, sans-serif;
-  --font-inter: 'Inter', system-ui, sans-serif;
-  --foreground-rgb: 51, 51, 51;
-  --background-rgb: 248, 249, 250;
-}
-
+/* 基础CSS重置和默认样式 */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -17,9 +9,14 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: var(--font-roboto);
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  font-family: system-ui, sans-serif;
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
 }
 
 a {
@@ -27,45 +24,14 @@ a {
   text-decoration: none;
 }
 
-.antialiased {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* 添加必要的通用样式类 */
+/* 基础布局类 */
 .container {
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-/* 常用Flex布局 */
 .flex {
   display: flex;
 }
@@ -86,9 +52,13 @@ a {
   justify-content: space-between;
 }
 
-/* 间距 */
-.p-4 {
-  padding: 1rem;
+/* 常用间距 */
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
 }
 
 .py-4 {
@@ -101,23 +71,9 @@ a {
   padding-right: 1rem;
 }
 
-.my-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* 文本样式 */
 .text-center {
   text-align: center;
-}
-
-.font-bold {
-  font-weight: 700;
 }
 
 .text-lg {
@@ -132,19 +88,301 @@ a {
   font-size: 1.5rem;
 }
 
-/* 颜色 */
-.text-primary {
-  color: rgb(79, 70, 229);
+.font-bold {
+  font-weight: 700;
 }
 
-.bg-white {
+/* 卡片样式 */
+.card {
   background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.rounded {
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 主色调 */
+.text-primary {
+  color: #6366f1;
+}
+
+.bg-primary {
+  background-color: #6366f1;
+}
+
+.bg-light {
+  background-color: #f3f4f6;
+}
+
+/* 按钮 */
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
   border-radius: 0.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  border: none;
+  margin-right: 0.5rem;
 }
 
-.shadow {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+.btn-primary {
+  background-color: #6366f1;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #4f46e5;
+}
+
+/* 网格布局 */
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 应用布局样式 */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  margin-top: 64px; /* Header height */
+  padding: 2rem 0;
+}
+
+/* 导航样式 */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6366f1;
+}
+
+.desktop-menu {
+  display: none;
+}
+
+.nav-link {
+  margin-left: 2rem;
+  font-size: 1.125rem;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #6366f1;
+}
+
+.search-form {
+  display: none;
+}
+
+.search-input {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #e5e7eb;
+  background-color: #f3f4f6;
+}
+
+.mobile-menu-button {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 50;
+}
+
+.mobile-menu-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.mobile-close-button {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.mobile-nav-link {
+  font-size: 1.25rem;
+  padding: 0.5rem 0;
+}
+
+.mobile-search-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.mobile-search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #e5e7eb;
+  background-color: #f3f4f6;
+}
+
+/* 页脚样式 */
+.footer {
+  background-color: #f3f4f6;
+  padding: 1rem 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-brand {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-nav {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.footer-heading {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.footer-list {
+  list-style: none;
+}
+
+.footer-list li {
+  margin-bottom: 0.25rem;
+}
+
+.footer-contact {
+  text-align: center;
+}
+
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .desktop-menu {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .mobile-menu-button {
+    display: none;
+  }
+  
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .footer-brand {
+    margin-bottom: 0;
+    text-align: left;
+  }
+  
+  .footer-links {
+    flex-direction: row;
+  }
+  
+  .footer-nav {
+    margin-right: 2rem;
+    text-align: left;
+  }
+  
+  .footer-contact {
+    text-align: left;
+  }
 }

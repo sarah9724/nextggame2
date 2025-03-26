@@ -235,11 +235,11 @@ export default function GamePage() {
   if (!game) {
     return (
       <AppLayout>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center py-16">
-            <h1 className="text-3xl font-bold text-gray-800 mb-4">游戏未找到</h1>
-            <p className="text-gray-600 mb-8">抱歉，您查找的游戏不存在或已被移除</p>
-            <a href="/" className="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+        <div className="container">
+          <div className="text-center py-4">
+            <h1 className="text-2xl font-bold mb-4">游戏未找到</h1>
+            <p className="mb-4">抱歉，您查找的游戏不存在或已被移除</p>
+            <a href="/" className="btn btn-primary">
               返回首页
             </a>
           </div>
@@ -250,18 +250,18 @@ export default function GamePage() {
 
   return (
     <AppLayout>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="container">
         {/* 游戏标题区 */}
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-purple-800 mb-2">{game.title}</h1>
-          <div className="inline-block px-4 py-1 bg-purple-100 text-purple-600 rounded-full text-sm">
+        <div className="mb-4 text-center">
+          <h1 className="text-2xl font-bold mb-2">{game.title}</h1>
+          <div className="text-lg">
             {game.category}
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div className="card">
           {/* 游戏iframe嵌入 */}
-          <div className="mb-6">
+          <div className="mb-4">
             <GameEmbed 
               gameUrl={game.iframeUrl} 
               title={game.title} 
@@ -270,26 +270,24 @@ export default function GamePage() {
           </div>
 
           {/* 游戏描述和信息 */}
-          <div className="p-8">
-            <div className="prose max-w-none">
-              <p className="text-gray-600 text-lg leading-relaxed">{game.longDescription}</p>
+          <div className="p-4">
+            <div>
+              <p>{game.longDescription}</p>
             </div>
             
             {/* 评分系统 */}
-            <div className="mt-8 p-4 bg-purple-50 rounded-lg">
+            <div className="mt-4 p-4 bg-light">
               <RatingSystem gameId={gameId} initialRating={game.rating} />
             </div>
             
             {/* 游戏特点 */}
-            <div className="mt-8">
-              <h2 className="text-xl font-semibold text-purple-700 mb-4">游戏特点</h2>
-              <div className="grid grid-cols-2 gap-4">
+            <div className="mt-4">
+              <h2 className="text-xl font-bold mb-4">游戏特点</h2>
+              <div className="grid grid-cols-2">
                 {game.features.map((feature, index) => (
-                  <div key={index} className="flex items-center bg-purple-50 p-3 rounded-lg">
-                    <span className="w-8 h-8 bg-purple-200 rounded-full flex items-center justify-center text-purple-800 mr-3">
-                      ✦
-                    </span>
-                    <span className="text-gray-700">{feature}</span>
+                  <div key={index} className="flex items-center p-2">
+                    <span className="mr-2">✦</span>
+                    <span>{feature}</span>
                   </div>
                 ))}
               </div>
@@ -297,16 +295,15 @@ export default function GamePage() {
           </div>
 
           {/* 社区互动区 */}
-          <div className="border-t border-gray-100 p-8 bg-gradient-to-b from-white to-purple-50">
-            <div className="max-w-4xl mx-auto">
+          <div className="p-4">
+            <div>
               {/* 评论区域标题 */}
-              <div className="flex items-center mb-6">
-                <div className="h-10 w-1 bg-purple-500 rounded-full mr-4"></div>
-                <h2 className="text-2xl font-bold text-purple-800">玩家评论</h2>
+              <div className="mb-4">
+                <h2 className="text-xl font-bold">玩家评论</h2>
               </div>
               
               {/* 评论组件 */}
-              <div className="bg-white p-6 rounded-xl shadow-sm">
+              <div className="card p-4">
                 <CommentSection gameId={gameId} />
               </div>
             </div>
@@ -314,25 +311,25 @@ export default function GamePage() {
         </div>
         
         {/* 相关推荐 */}
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold text-purple-800 mb-6">猜你喜欢</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-4">
+          <h2 className="text-xl font-bold mb-4">猜你喜欢</h2>
+          <div className="grid grid-cols-2 grid-cols-4">
             {gamesData.filter(g => g.id !== gameId).slice(0, 4).map(relatedGame => (
               <a 
                 href={`/games/${relatedGame.id}`}
                 key={relatedGame.id} 
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow group"
+                className="card"
               >
-                <div className="h-40 bg-gradient-to-r from-pink-100 to-purple-100 flex items-center justify-center group-hover:from-pink-200 group-hover:to-purple-200 transition-all">
-                  <div className="text-5xl opacity-70">🎮</div>
+                <div className="p-4 text-center">
+                  <div className="text-2xl mb-2">🎮</div>
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold text-purple-800 group-hover:text-purple-600 transition-colors">{relatedGame.title}</h3>
-                  <p className="text-sm text-gray-500 mt-1">{relatedGame.category}</p>
-                  <div className="mt-2 flex items-center">
-                    <span className="text-yellow-400">{'★'.repeat(Math.floor(relatedGame.rating))}</span>
-                    <span className="text-gray-300">{'☆'.repeat(5-Math.floor(relatedGame.rating))}</span>
-                    <span className="text-sm text-gray-500 ml-2">{relatedGame.rating}</span>
+                  <h3 className="font-bold">{relatedGame.title}</h3>
+                  <p className="text-lg">{relatedGame.category}</p>
+                  <div className="mt-2">
+                    <span>{'★'.repeat(Math.floor(relatedGame.rating))}</span>
+                    <span>{'☆'.repeat(5-Math.floor(relatedGame.rating))}</span>
+                    <span>{relatedGame.rating}</span>
                   </div>
                 </div>
               </a>

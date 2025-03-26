@@ -1,0 +1,33 @@
+name = "nextggame"
+main = "./build/index.js"
+compatibility_date = "2023-05-18"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+[build]
+command = "npm run build"
+
+[env.production]
+name = "nextggame-production"
+workers_dev = false
+route = "nextggame2.pages.dev"
+
+[site]
+bucket = ".next/static"
+
+# 开启边缘函数支持
+[build.upload]
+format = "service-worker"
+
+# 设置环境变量
+[vars]
+NODE_ENV = "production"
+
+# 配置KV存储(可选)
+# [[kv_namespaces]]
+# binding = "MY_KV"
+# id = "xxxxx"
+
+# 增加资源限制
+[limits]
+cpu_ms = 50 

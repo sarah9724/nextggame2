@@ -10,9 +10,9 @@ interface AppLayoutProps {
 
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="app-container">
       <AppNavigation />
-      <main className="flex-1">
+      <main className="main-content">
         {children}
       </main>
       <AppFooter />
